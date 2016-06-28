@@ -3,11 +3,20 @@
 ## Example
 
 ```
-cron_tasks:
-  - name: 'Magento Reindex'
-    job: 'php -f /home/user/magento/shell/indexer.php --reindexall'
-    minute: 0
-    hour: 6
+exim_config:
+  - { option: 'dc_eximconfig_configtype', value: 'local' }
+  - { option: 'dc_other_hostnames', value: '{{ ansible_hostname }}' }
+  - { option: 'dc_local_interfaces', value: '127.0.0.1 ; ::1' }
+  - { option: 'dc_readhost', value: '' }
+  - { option: 'dc_relay_domains', value: '' }
+  - { option: 'dc_minimaldns', value: 'false' }
+  - { option: 'dc_relay_nets', value: '' }
+  - { option: 'dc_smarthost', value: '' }
+  - { option: 'CFILEMODE', value: '644' }
+  - { option: 'dc_use_split_config', value: 'false' }
+  - { option: 'dc_hide_mailname', value: '' }
+  - { option: 'dc_mailname_in_oh', value: 'true' }
+  - { option: 'dc_localdelivery', value: 'mail_spool' }
 ```
 
 ## Role Variables
@@ -15,46 +24,41 @@ cron_tasks:
 Available variables are listed below, along with default values (see [defaults/main.yml](/defaults/main.yml)):
 
 ```
-cron_packages:
+exim_packages:
 ```
 
-A list of the Cron packages to install. Each package supports all parameters from the
+A list of the Exim packages to install. Each package supports all parameters from the
 [apt](http://docs.ansible.com/ansible/apt_module.html) or [yum](http://docs.ansible.com/ansible/yum_module.html) modules.
 If the value remains omitted, the following packages will be installed by default.
 
 | Debian/Ubuntu          | RedHat/CentOS           |
 | :--------------------- | :---------------------- |
-| cron                   | cronie                  |
+| exim4                  | exim                    |
 
 ```
-cron_service_name:
+exim_service_name:
 ```
 
-The name of the daemon under which Cron runs. Typically this can be omitted since it's automatically determined
-based on the target operating system. For RedHat/CentOS this is `crond` and Debian/Ubuntu it's `cron`.
+The name of the daemon under which Exim runs. Typically this can be omitted since it's automatically determined
+based on the target operating system. For RedHat/CentOS this is `exim` and Debian/Ubuntu it's `exim4`.
 
 ```
-cron_service_state: 'started'
+exim_service_state: 'started'
 ```
 
-The desired Cron service state, valid values are `started`, `stopped`, `restarted` or `reloaded`.
+The desired Exim service state, valid values are `started`, `stopped`, `restarted` or `reloaded`.
 
 ```
-cron_service_enabled: yes
+exim_service_enabled: yes
 ```
 
-Whether the Cron service should start on boot, valid values are `yes`, or `no`.
+Whether the Exim service should start on boot, valid values are `yes`, or `no`.
 
 ```
-cron_vars:
+exim_config:
 ```
 
-A list of the Cron variables to manage. Each variable supports all parameters from the
-[cronvar](http://docs.ansible.com/ansible/cronvar_module.html) module.
-
-```
-cron_tasks:
-```
-
-A list of the Cron tasks to manage. Each task supports all parameters from the
-[cron](http://docs.ansible.com/ansible/cron_module.html) module.
+An array of option hashes used to customise Exim configuration settings. Each option expects at least
+two parameters, `option` which is the name of the option and `value`, a string value to be associated
+with an option. An optional parameter `state` can also be specified which determines whether a particular
+option should exist in the configuration file. Valid values are `present` or `absent`.

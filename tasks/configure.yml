@@ -7,10 +7,16 @@
 
 ---
 
-- name: 'Exim | Get conf file contents'
-  shell: 'cat {{ exim_conf_file }}'
-  register: 'exim_conf_contents'
-
-- name: 'Exim | Debug file contents'
-  debug:
-    msg: '{{ exim_conf_contents }}'
+- name: 'Exim | Debian | Configure '
+  become: yes
+  lineinfile:
+    dest: '{{ exim_config_file }}'
+    regexp: '^{{ item.option }}'
+    line: '{{ item.option }}=''{{ item.value }}'''
+    state: '{{ item.state | default(omit) }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: 'restart exim'
+  with_items: '{{ exim_config }}'
+  when: '{{ ansible_os_family == "Debian" and exim_config | default(None) != None }}'

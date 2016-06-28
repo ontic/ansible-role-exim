@@ -11,3 +11,4 @@ exim_packages:
 exim_service_name:
 exim_service_state: 'started'
 exim_service_enabled: yes
+exim_config:
