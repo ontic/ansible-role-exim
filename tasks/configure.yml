@@ -7,7 +7,7 @@
 
 ---
 
-- name: 'Exim | Debian | Configure '
+- name: 'Exim | Debian | Configure configuration variables.'
   become: yes
   lineinfile:
     dest: '{{ exim_config_file }}'
@@ -20,3 +20,13 @@
   notify: 'restart exim'
   with_items: '{{ exim_config }}'
   when: '{{ ansible_os_family == "Debian" and exim_config | default(None) != None }}'
+
+- name: 'Exim | Debian | Configure remote password authentication.'
+  become: yes
+  template:
+    src: 'passwd.client.j2'
+    dest: '/etc/exim4/passwd.client'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  when: '{{ ansible_os_family == "Debian" }}'

@@ -4,7 +4,7 @@
 
 ```
 exim_config:
-  - { option: 'dc_eximconfig_configtype', value: 'local' }
+  - { option: 'dc_eximconfig_configtype', value: 'internet' }
   - { option: 'dc_other_hostnames', value: '{{ ansible_hostname }}' }
   - { option: 'dc_local_interfaces', value: '127.0.0.1 ; ::1' }
   - { option: 'dc_readhost', value: '' }
@@ -62,3 +62,9 @@ An array of option hashes used to customise Exim configuration settings. Each op
 two parameters, `option` which is the name of the option and `value`, a string value to be associated
 with an option. An optional parameter `state` can also be specified which determines whether a particular
 option should exist in the configuration file. Valid values are `present` or `absent`.
+
+```
+exim_passwd_clients:
+```
+
+An array of authentication settings used when authenticating to a remote host as a client.
