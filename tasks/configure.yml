@@ -7,9 +7,10 @@
 
 ---
 
-- name: 'Exim | Debug.'
-  set_fact:
-    exim_conf_contents: '{{ lookup("file", exim_conf_file) }}'
+- name: 'Exim | Get conf file contents'
+  shell: 'cat {{ exim_conf_file }}'
+  register: 'exim_conf_contents'
 
-debug:
-  msg: '{{ exim_conf_contents }}'
+- name: 'Exim | Debug file contents'
+  debug:
+    msg: '{{ exim_conf_contents }}'
