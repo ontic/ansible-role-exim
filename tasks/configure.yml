@@ -10,7 +10,7 @@
 - name: 'Exim | Debian | Configure configuration variables.'
   become: yes
   lineinfile:
-    dest: '{{ exim_config_file }}'
+    dest: '{{ exim_conf_file }}'
     regexp: '^{{ item.option }}'
     line: '{{ item.option }}=''{{ item.value }}'''
     state: '{{ item.state | default(omit) }}'
