@@ -11,3 +11,4 @@ exim_default_packages:
   - name: 'exim'
 
 exim_default_service_name: 'exim'
+exim_conf_file: '/etc/exim/exim.conf'
