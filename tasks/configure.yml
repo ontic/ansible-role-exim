@@ -15,6 +15,7 @@
     owner: 'root'
     group: 'root'
     mode: '0644'
+  notify: 'restart exim'
 
 - name: 'Exim | Debian | Configure configuration variables.'
   become: yes
