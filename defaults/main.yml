@@ -11,5 +11,6 @@ exim_packages:
 exim_service_name:
 exim_service_state: 'started'
 exim_service_enabled: yes
+exim_mailname:
 exim_config:
 exim_passwd_clients:

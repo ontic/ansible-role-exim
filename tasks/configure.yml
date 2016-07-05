@@ -7,6 +7,15 @@
 
 ---
 
+- name: 'Exim | Configure system mail name.'
+  become: yes
+  template:
+    src: 'mailname.j2'
+    dest: '/etc/mailname'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+
 - name: 'Exim | Debian | Configure configuration variables.'
   become: yes
   lineinfile:

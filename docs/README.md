@@ -55,6 +55,12 @@ exim_service_enabled: yes
 Whether the Exim service should start on boot, valid values are `yes`, or `no`.
 
 ```
+exim_mailname:
+```
+
+The visible mail name of the system. If omitted the variable `ansible_fqdn` will be used.
+
+```
 exim_config:
 ```
 
