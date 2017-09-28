@@ -1,0 +1,23 @@
+# Copyright (c) Ontic. (http://www.ontic.com.au). All rights reserved.
+# See the COPYING file bundled with this package for license details.
+
+---
+
+- hosts: 'localhost'
+  vars:
+    exim_config:
+      - { option: 'dc_eximconfig_configtype', value: 'internet' }
+      - { option: 'dc_other_hostnames', value: '{{ ansible_hostname }}' }
+      - { option: 'dc_local_interfaces', value: '127.0.0.1 ; ::1' }
+      - { option: 'dc_readhost', value: '' }
+      - { option: 'dc_relay_domains', value: '' }
+      - { option: 'dc_minimaldns', value: 'false' }
+      - { option: 'dc_relay_nets', value: '' }
+      - { option: 'dc_smarthost', value: '' }
+      - { option: 'CFILEMODE', value: '644' }
+      - { option: 'dc_use_split_config', value: 'false' }
+      - { option: 'dc_hide_mailname', value: '' }
+      - { option: 'dc_mailname_in_oh', value: 'true' }
+      - { option: 'dc_localdelivery', value: 'mail_spool' }
+  roles:
+    - { role: 'role_under_test' }
