@@ -5,6 +5,7 @@
 
 - hosts: 'localhost'
   vars:
+    exim_mailname: '{{ ansible_hostname }}'
     exim_config:
       - { option: 'dc_eximconfig_configtype', value: 'internet' }
       - { option: 'dc_other_hostnames', value: '{{ ansible_hostname }}' }
