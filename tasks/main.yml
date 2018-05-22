@@ -40,19 +40,19 @@
     - 'configure'
     - 'service'
 
-- include: 'package.yml'
+- import_tasks: 'package.yml'
   tags:
     - 'exim'
     - 'exim-package'
     - 'package'
 
-- include: 'configure.yml'
+- import_tasks: 'configure.yml'
   tags:
     - 'exim'
     - 'exim-configure'
     - 'configure'
 
-- include: 'service.yml'
+- import_tasks: 'service.yml'
   tags:
     - 'exim'
     - 'exim-service'
