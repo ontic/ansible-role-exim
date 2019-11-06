@@ -61,6 +61,12 @@ exim_mailname:
 The visible mail name of the system. If omitted the variable `ansible_fqdn` will be used.
 
 ```
+exim_skip_mailname: no
+```
+
+When defined and the value is `yes` the system mailname will not be updated.
+
+```
 exim_config:
 ```
 
