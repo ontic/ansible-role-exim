@@ -12,6 +12,7 @@
     group: 'root'
     mode: '0644'
   notify: 'restart exim'
+  when: 'exim_skip_mailname is undefined or exim_skip_mailname == False'
 
 - name: 'Exim | Debian | Configure configuration variables.'
   become: yes
